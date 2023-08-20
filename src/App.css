@@ -7,10 +7,14 @@
 
 .movie-card {
   width: 300px;
+  min-height: 540px;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .movie-card h2 {
@@ -31,6 +35,7 @@
 
 .movie-card img {
   width: 100%;
+  height: 100%;
   border-radius: 10px 10px 0 0;
 }
 
@@ -46,4 +51,20 @@
 
 .header {
   margin-bottom: 20px;
+}
+/* Movie Details  */
+.movie-details-card {
+  display: flex;
+  gap: 50px;
+  padding: 20px;
+  margin: auto 5%;
+  font-size: 20px;
+}
+
+.movie-details-card>img {
+  width: 10%
+}
+
+.movie-details-card-content>div {
+  margin: 10px auto
 }

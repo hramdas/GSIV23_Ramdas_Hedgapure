@@ -3,6 +3,7 @@ import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { getMovies } from '../api';
 import Header from './Header';
+import { Link } from 'react-router-dom';
 
 const MovieListing = () => {
   const [movies, setMovies] = useState([]);
@@ -39,19 +40,21 @@ const MovieListing = () => {
       >
         <div className="movie-list">
           {movies.map((movie) => (
-            <div key={movie.id} className="movie-card">
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={`${movie.title} Poster`}
-              />
-              <div className="movie-details">
-                <div className="movie-title-rating">
-                  <b>{movie.title}</b>
-                  <p>{movie.vote_average}</p>
+            <Link style={{all:'unset', cursor: 'pointer'}} key={movie.id} to={`/${movie.id}`}>
+              <div className="movie-card">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt={`${movie.title} Poster`}
+                />
+                <div className="movie-details">
+                  <div className="movie-title-rating">
+                    <b>{movie.title}</b>
+                    <p>{movie.vote_average}</p>
+                  </div>
+                  <p>{movie.overview}</p>
                 </div>
-                <p>{movie.overview}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </InfiniteScroll>
