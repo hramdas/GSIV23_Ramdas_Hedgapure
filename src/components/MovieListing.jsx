@@ -6,21 +6,31 @@ import Header from './Header';
 
 const MovieListing = () => {
   const [movies, setMovies] = useState([]);
+  const [searchText, setSearchText] = useState('')
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchMovies();
-  }, [page]);
-
   const fetchMovies = async () => {
-    const {results} = await getMovies(page)
+    const {results} = await getMovies(page, searchText)
     if (results)
-      setMovies([...movies, ...results])
+      page===1 ? setMovies(results) : setMovies([...movies, ...results])
   };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setPage(1)
+    setSearchText(value);
+  }
+
+  useEffect(() => {
+    const getData = setTimeout(() => {
+      fetchMovies();
+    }, 300)
+    return () => clearTimeout(getData)
+  }, [page, searchText]);
 
   return (
     <div>
-      <Header />
+      <Header handleInputChange={handleInputChange} page='list' />
       <InfiniteScroll
         dataLength={movies.length}
         next={() => setPage(page + 1)}
@@ -34,11 +44,13 @@ const MovieListing = () => {
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 alt={`${movie.title} Poster`}
               />
-              <div className="movie-title-rating">
-                <b>{movie.title}</b>
-                <p>{movie.vote_average}</p>
+              <div className="movie-details">
+                <div className="movie-title-rating">
+                  <b>{movie.title}</b>
+                  <p>{movie.vote_average}</p>
+                </div>
+                <p>{movie.overview}</p>
               </div>
-              <p>{movie.overview}</p>
             </div>
           ))}
         </div>

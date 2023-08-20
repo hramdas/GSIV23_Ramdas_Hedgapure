@@ -7,7 +7,6 @@
 
 .movie-card {
   width: 300px;
-  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -32,9 +31,12 @@
 
 .movie-card img {
   width: 100%;
-  height: auto;
+  border-radius: 10px 10px 0 0;
 }
 
+.movie-details {
+  padding: 10px;
+}
 .movie-title-rating {
   display: flex;
   justify-content: space-between;
